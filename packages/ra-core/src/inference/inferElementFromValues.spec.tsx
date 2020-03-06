@@ -36,6 +36,15 @@ describe('inferElementFromValues', () => {
             inferElementFromValues('id', ['foo', 'bar'], types).getElement()
         ).toEqual(<Good source="id" />);
     });
+    it('should return an _id field for field named _id', () => {
+        const types = {
+            _id: { component: Good },
+            string: { component: Bad },
+        };
+        expect(
+            inferElementFromValues('_id', ['foo', 'bar'], types).getElement()
+        ).toEqual(<Good source="_id" />);
+    });
     it('should return a reference field for field named *_id', () => {
         const types = {
             reference: { component: Good },
