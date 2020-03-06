@@ -82,7 +82,10 @@ const inferElementFromValues = (
     values = [],
     types: InferredTypeMap = defaultTypes
 ) => {
-    if (name === 'id' && hasType('id', types)) {
+    if (
+        (name === 'id' && hasType('id', types)) ||
+        (name === '_id' && hasType('_id', types))
+    ) {
         return new InferredElement(types.id, { source: name });
     }
     if (name.substr(name.length - 3) === '_id' && hasType('reference', types)) {
